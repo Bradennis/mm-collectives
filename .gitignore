@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.vite/
+.vercel/
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
+# Local scratch copies of reference images (placeholders live in storefront/public/placeholders)
+item images/

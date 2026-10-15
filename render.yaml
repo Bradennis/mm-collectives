@@ -1,0 +1,26 @@
+# Render Blueprint for the API. Frontends are deployed separately on Vercel.
+services:
+  - type: web
+    name: mm-collectives-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: TRUST_PROXY_HOPS
+        value: "2"
+      - key: JWT_SECRET
+        generateValue: true
+      # Entered in the Render dashboard when the Blueprint is created:
+      - key: MONGO_URI
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: ADMIN_URL
+        sync: false
