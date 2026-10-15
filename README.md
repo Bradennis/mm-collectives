@@ -81,3 +81,15 @@ The two frontends use separate CSS variable palettes (`storefront/src/styles/the
 2. Add image upload (e.g. Cloudinary or S3) for products and import-request photos.
 3. Build the Shipping Batch admin page to bulk-assign orders to a container/flight and update statuses in bulk.
 4. Add SMS notifications (e.g. via a Ghana-focused SMS gateway) when order status changes.
+
+## Deployment
+| Part | Host | URL |
+|---|---|---|
+| Storefront (`storefront/`) | Vercel | https://mm-collectives.vercel.app |
+| Admin (`admin/`) | Vercel | https://mm-collectives-admin.vercel.app |
+| API (`backend/`) | Render | https://mm-collectives-api.onrender.com |
+
+- Pushing to `main` on GitHub redeploys automatically. Each Vercel project only rebuilds for changes in its own folder; Render only for changes in `backend/`.
+- Both Vercel sites forward `/api/*` to the Render API (`vercel.json`), so the browser only ever talks to one domain.
+- API environment variables (`MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`, `ADMIN_URL`, ...) are set in the Render dashboard, never in the repo.
+- `GET /api/health` reports the commit the API is running.

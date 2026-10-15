@@ -44,7 +44,10 @@ app.use("/api/import-requests", importRequestRoutes);
 app.use("/api/admin/analytics", analyticsRoutes);
 app.use("/api/admin/customers", customerRoutes);
 
-app.get("/api/health", (req, res) => res.json({ status: "ok", service: "mm-collectives-api" }));
+// RENDER_GIT_COMMIT is set by Render, so this shows which commit is live
+app.get("/api/health", (req, res) =>
+  res.json({ status: "ok", service: "mm-collectives-api", commit: process.env.RENDER_GIT_COMMIT?.slice(0, 7) || "local" })
+);
 
 app.use(notFound);
 app.use(errorHandler);
