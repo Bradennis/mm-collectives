@@ -5,7 +5,9 @@ export default function Customers() {
   const [customers, setCustomers] = useState([]);
 
   const load = () => api.get("/admin/customers").then((res) => setCustomers(res.data));
-  useEffect(load, []);
+  useEffect(() => {
+    load();
+  }, []);
 
   const toggleStatus = async (id) => {
     await api.patch(`/admin/customers/${id}/status`);

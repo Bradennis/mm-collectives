@@ -8,7 +8,8 @@ const getCustomers = asyncHandler(async (req, res) => {
   const customers = await User.find({ role: "customer" }).select("-password").sort({ createdAt: -1 });
 
   const orderStats = await Order.aggregate([
-    { $match: { paymentStatus: "paid" } },
+    // Guest orders have no user account, so they are not customer stats
+    { $match: { paymentStatus: "paid", user: { $ne: null } } },
     { $group: { _id: "$user", totalSpentGHS: { $sum: "$totalGHS" }, orderCount: { $sum: 1 } } },
   ]);
   const statsMap = Object.fromEntries(orderStats.map((s) => [s._id.toString(), s]));

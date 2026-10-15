@@ -20,7 +20,9 @@ export default function Orders() {
     });
   };
 
-  useEffect(load, [statusFilter, page]);
+  useEffect(() => {
+    load();
+  }, [statusFilter, page]);
 
   return (
     <div>

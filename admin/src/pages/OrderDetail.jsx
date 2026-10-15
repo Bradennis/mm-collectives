@@ -21,7 +21,9 @@ export default function OrderDetail() {
     setTrackingNumber(res.data.trackingNumber || "");
   });
 
-  useEffect(load, [id]);
+  useEffect(() => {
+    load();
+  }, [id]);
 
   const handleUpdate = async () => {
     setSaving(true);

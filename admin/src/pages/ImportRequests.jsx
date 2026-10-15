@@ -7,7 +7,9 @@ export default function ImportRequests() {
   const [quoteForms, setQuoteForms] = useState({}); // { [id]: { estimatedUnitCostGHS, estimatedShippingGHS, adminNote } }
 
   const load = () => api.get("/import-requests", { params: { status: statusFilter || undefined } }).then((res) => setRequests(res.data));
-  useEffect(load, [statusFilter]);
+  useEffect(() => {
+    load();
+  }, [statusFilter]);
 
   const handleQuoteChange = (id, field, value) => {
     setQuoteForms((prev) => ({ ...prev, [id]: { ...prev[id], [field]: value } }));
