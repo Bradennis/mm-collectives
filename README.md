@@ -89,7 +89,7 @@ The two frontends use separate CSS variable palettes (`storefront/src/styles/the
 | Admin (`admin/`) | Vercel | https://mm-collectives-admin.vercel.app |
 | API (`backend/`) | Render | https://mm-collectives-api.onrender.com |
 
-- Pushing to `main` on GitHub redeploys automatically. Each Vercel project only rebuilds for changes in its own folder; Render only for changes in `backend/`.
+- Pushing to `main` on GitHub redeploys automatically: both Vercel sites rebuild on every push (about a minute), and Render redeploys the API when `backend/` changes (a few minutes).
 - Both Vercel sites forward `/api/*` to the Render API (`vercel.json`), so the browser only ever talks to one domain.
 - API environment variables (`MONGO_URI`, `JWT_SECRET`, `CLIENT_URL`, `ADMIN_URL`, ...) are set in the Render dashboard, never in the repo.
 - `GET /api/health` reports the commit the API is running.
